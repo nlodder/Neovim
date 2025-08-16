@@ -3,6 +3,10 @@ local opt = vim.opt
 vim.g.lazyvim_python_lsp = "pyright"
 vim.g.lazyvim_python_ruff = "ruff"
 
+-- Disable unused language providers to remove :checkhealth warnings
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 opt.relativenumber = true
 opt.number = true
 
