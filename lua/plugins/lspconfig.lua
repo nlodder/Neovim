@@ -3,6 +3,8 @@ return {
 
   config = function()
     local lspconfig = require("lspconfig")
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     -- Clangd Setup
     lspconfig.clangd.setup {
       cmd = {
@@ -31,9 +33,9 @@ return {
           fname
         ) or require("lspconfig.util").find_git_ancestor(fname)
       end,
-      capabilities = { 
-        offsetEncoding = {"utf-16"}
-      },
+      capabilities = vim.tbl_deep_extend("force", capabilities, {
+        offsetEncoding = { "utf-16" }
+      }),
       init_options = {
         usePlaceholders = true,
         completeUnimported = true,
@@ -41,9 +43,9 @@ return {
       },
     }
 
-
     -- Lua LS Setup
     lspconfig.lua_ls.setup {
+      capabilities = capabilities,
       on_init = function(client)
         if client.workspace_folders then
           local path = client.workspace_folders[1].name
@@ -68,11 +70,28 @@ return {
 
     -- Pyright Setup for Python
     lspconfig.pyright.setup {
+      capabilities = capabilities,
       settings = {
         python = {
           pythonPath = vim.fn.exepath("python3"),
         },
       },
     }
+
+    -- HTML LSP Setup
+    lspconfig.html.setup {
+      capabilities = capabilities,
+    }
+
+    -- CSS LSP Setup
+    lspconfig.cssls.setup {
+      capabilities = capabilities,
+    }
+
+    -- JSON LSP Setup
+    lspconfig.jsonls.setup {
+      capabilities = capabilities,
+    }
   end
 }
+

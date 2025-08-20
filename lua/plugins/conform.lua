@@ -6,12 +6,14 @@ return {
 
       conform.setup({
         formatters_by_ft = {
+          cpp = { "clang-format" },
+          javascript = { "prettier" },  
           lua = { "stylua" },
           typescript = { { "prettierd", "prettier", stop_after_first = true } },
           json = { { "prettierd", "prettier", stop_after_first = true } },
           java = { "google-java-format" },
           markdown = { { "prettierd", "prettier", stop_after_first = true } },
-          html = { "htmlbeautifier" },
+          html = { "prettier" },
           bash = { "beautysh" },
           rust = { "rustfmt" },
           yaml = { "yamlfix" },
